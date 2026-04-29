@@ -27,10 +27,9 @@
     "New-Item -ItemType Junction -Path $env:ProgramData\\GHelper -Target $persist_dir\\backup | Out-Null"
   ],
   "pre_uninstall": "if (!(is_admin)) { throw 'Admin privileges are required.' }",
-  "post_uninstall": [
-    "Remove-Item $env:APPDATA\\GHelper -Force -Recurse",
-    "Remove-Item $env:ProgramData\\GHelper -Force -Recurse"
-  ],
+  "uninstaller": {
+    "script": "Remove-Item $env:APPDATA\\GHelper -Force -Recurse && Remove-Item $env:ProgramData\\GHelper -Force -Recurse"
+  },
   "bin": "GHelper.exe",
   "shortcuts": [["GHelper.exe", "G-Helper"]],
   "persist": ["data", "backup"],
